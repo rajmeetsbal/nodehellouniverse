@@ -4,7 +4,7 @@
   "description": "test",
   "main": "app.js",
   "scripts": {
-	  "start": "node app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rajmeetsbal/nodehellouniverse#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2"
   }
 }
