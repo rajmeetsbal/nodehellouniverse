@@ -14,9 +14,8 @@ var db = mongoose.connection
   });
 
 console.log("Connected to Mongo");
-console.log("Connected to Mongo"+db);
 
-
+/*
 db.once('open', function() {
     console.log("Connection Successful!");
     
@@ -40,28 +39,32 @@ db.once('open', function() {
     });
     
 }); 
+*/
 
 
 
 app.post("/add", function (req, res) {
-	var n = Math.random();
-	var BookSchema = mongoose.Schema({
-      name: String,
-      price: Number,
-      quantity: Number
-    });
- 
-    // compile schema to model
-    var Book = mongoose.model('Book', BookSchema, 'bookstore');
- 
-    // a document instance
-    var book1 = new Book({ name: 'Introduction to Mongoose'+n, price: 10+n, quantity: 25+n });
+	
  
     // save model to database
-    book1.save(function (err, book) {
-      if (err) return console.error(err);
-      console.log(book.name + " saved to bookstore collection.");
-    });
+	db.once('open', function() {
+		var n = Math.random();
+		var BookSchema = mongoose.Schema({
+		  name: String,
+		  price: Number,
+		  quantity: Number
+		});
+	 
+		// compile schema to model
+		var Book = mongoose.model('Book', BookSchema, 'bookstore');
+	 
+		// a document instance
+		var book1 = new Book({ name: 'Introduction to Mongoose'+n, price: 10+n, quantity: 25+n });
+		book1.save(function (err, book) {
+		  if (err) return console.error(err);
+		  console.log(book.name + " saved to bookstore collection.");
+		});
+	});
 });
 
 app.get("/show", function (req, res) {
