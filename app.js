@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = 8080
 
-mongoose.connect(mongodb://172.21.154.130:27017/testdb, {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect('mongodb://172.21.154.130:27017/testdb', {useNewUrlParser: true,useUnifiedTopology: true});
 
 mongoose.connection
   .on('open', () => {
