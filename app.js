@@ -16,7 +16,11 @@ mongoose.connection
     console.log(`Connection error: ${err.message}`);
   });
 
+console.log("Connected to Mongo");
+console.log("Connected to Mongo"+mongoose);
 
-app.get('/', (req, res) => res.send('Hello Universe2'))
+
+app.get('/', (req, res) => res.send('Hello Universe1'))
+app.get('/two', (req, res) => res.send('Hello Universe2'))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
