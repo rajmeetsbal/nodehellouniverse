@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express')
+var Book = require('./book.js');
 const app = express()
 const port = 8080
 
@@ -47,7 +48,7 @@ app.post("/add", function (req, res) {
 	
  
     // save model to database
-	db.once('open', function() {
+//	db.once('open', function() {
 		var n = Math.random();
 		var BookSchema = mongoose.Schema({
 		  name: String,
@@ -64,7 +65,7 @@ app.post("/add", function (req, res) {
 		  if (err) return console.error(err);
 		  console.log(book.name + " saved to bookstore collection.");
 		});
-	});
+//	});
 });
 
 app.get("/show", function (req, res) {
@@ -82,6 +83,19 @@ app.get("/show", function (req, res) {
 		res.send(books);
 	});
 });
+
+
+app.get("/books", function (req, res) {
+	db.on('error', console.error.bind(console, 'connection error:'));
+	var a1= db.once('open',function(){
+	  Book.find({},{},function (err, books) {
+		mongoose.connection.close();
+		console.log("books supplied"+books);
+		//doSomethingHere 
+	  })
+	});
+});
+
 
 
 
