@@ -7,23 +7,32 @@ const port = 8080
 mongoose.connect('mongodb://rajmeet:rajmeet@172.21.154.130:27017/testdb', {useNewUrlParser: true,useUnifiedTopology: true});
 
 
+var db = mongoose.connection
+	  .on('open', () => {
+		console.log('Mongoose connection open');
+	  })
+	  .on('error', (err) => {
+		console.log(`Connection error: ${err.message}`);
+	  });
 
-/*
+
 db.once('open', function() {
     console.log("Connection Successful!");
     
     // define Schema
+	/*
     var BookSchema = mongoose.Schema({
       name: String,
       price: Number,
       quantity: Number
     });
+	*/
  
     // compile schema to model
-    var Book = mongoose.model('Book', BookSchema, 'bookstore');
+    //var Book = mongoose.model('Book', BookSchema, 'bookstore');
  
     // a document instance
-    var book1 = new Book({ name: 'Introduction to Mongoose', price: 10, quantity: 25 });
+    var book1 = new Book({ name: 'Introduction to sakhbk jcwej', price: 101, quantity: 2 });
  
     // save model to database
     book1.save(function (err, book) {
@@ -32,7 +41,7 @@ db.once('open', function() {
     });
     
 }); 
-*/
+
 
 
 
