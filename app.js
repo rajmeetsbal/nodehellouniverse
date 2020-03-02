@@ -88,9 +88,10 @@ app.get("/show", function (req, res) {
 app.get("/books", function (req, res) {
 	db.on('error', console.error.bind(console, 'connection error:'));
 	var a1= db.once('open',function(){
-	  Book.find({},{},function (err, books) {
+	  Book.find({},function (err, books) {
 		mongoose.connection.close();
 		console.log("books supplied"+books);
+		res.send(books);
 		//doSomethingHere 
 	  })
 	});
