@@ -6,15 +6,7 @@ const port = 8080
 
 mongoose.connect('mongodb://rajmeet:rajmeet@172.21.154.130:27017/testdb', {useNewUrlParser: true,useUnifiedTopology: true});
 
-var db = mongoose.connection
-  .on('open', () => {
-    console.log('Mongoose connection open');
-  })
-  .on('error', (err) => {
-    console.log(`Connection error: ${err.message}`);
-  });
 
-console.log("Connected to Mongo");
 
 /*
 db.once('open', function() {
@@ -86,15 +78,27 @@ app.get("/show", function (req, res) {
 
 
 app.get("/books", function (req, res) {
-	db.on('error', console.error.bind(console, 'connection error:'));
-	var a1= db.once('open',function(){
+	console.log("calling /books");
+	var db = mongoose.connection
+	  .on('open', () => {
+		console.log('Mongoose connection open');
+	  })
+	  .on('error', (err) => {
+		console.log(`Connection error: ${err.message}`);
+	  });
+
+	console.log("Connected to Mongo again");
+	
+	db.once('open',function(){
 	  Book.find({},function (err, books) {
-		mongoose.connection.close();
 		console.log("books supplied"+books);
 		res.send(books);
-		//doSomethingHere 
-	  })
+		mongoose.connection.close();
+	  });
 	});
+	
+	
+	console.log("ddone");
 });
 
 
