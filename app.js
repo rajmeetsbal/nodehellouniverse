@@ -34,11 +34,11 @@ app.post("/add", function (req, res) {
 		console.log("adding....");
 		var n = Math.random();
 		var book1 = new Book({ name: 'Introduction to Mongoose'+n, price: 10+n, quantity: 25+n });
-		book1.save(function (err) {
+		book1.save(function (err, book) {
 		  if (err) 
 			  return console.error(err);
-		  console.log("saved....");
-		  
+		  console.log("saved...."+book);
+		  res.send(book);
 		});
 		console.log("finishing....");
 });
