@@ -18,95 +18,34 @@ var db = mongoose.connection
 
 db.once('open', function() {
     console.log("Connection Successful!");
-    
-    // define Schema
-	/*
-    var BookSchema = mongoose.Schema({
-      name: String,
-      price: Number,
-      quantity: Number
-    });
-	*/
- 
-    // compile schema to model
-    //var Book = mongoose.model('Book', BookSchema, 'bookstore');
- 
-    // a document instance
-    var book1 = new Book({ name: 'Introduction to sadwej', price: 1301, quantity: 23 });
- 
-    // save model to database
+    var book1 = new Book({ name: 'Introduction to sdkjaa', price: 13201, quantity: 233 });
     book1.save(function (err, book) {
       if (err) return console.error(err);
       console.log(book.name + " saved to bookstore collection.");
     });
-    
 }); 
 
 
 
 
 app.post("/add", function (req, res) {
-	
- 
-    // save model to database
-//	db.once('open', function() {
+		console.log("adding....");
 		var n = Math.random();
-		var BookSchema = mongoose.Schema({
-		  name: String,
-		  price: Number,
-		  quantity: Number
-		});
-	 
-		// compile schema to model
-		var Book = mongoose.model('Book', BookSchema, 'bookstore');
-	 
-		// a document instance
 		var book1 = new Book({ name: 'Introduction to Mongoose'+n, price: 10+n, quantity: 25+n });
 		book1.save(function (err, book) {
 		  if (err) return console.error(err);
 		  console.log(book.name + " saved to bookstore collection.");
 		});
-//	});
+		
+		console.log("finishing....");
 });
 
 app.get("/show", function (req, res) {
- 
-    // compile schema to model
-    //var Book = mongoose.model('Book', BookSchema, 'bookstore');
- 
 	Book.find({}, function(error, books) {
-		console.log(books); //Display the comments returned by MongoDB, if any were found. Executes after the query is complete.
+		console.log(books);
 		res.send(books);
 	});
 });
-
-
-app.get("/books", function (req, res) {
-	console.log("calling /books");
-	var db = mongoose.connection
-	  .on('open', () => {
-		console.log('Mongoose connection open');
-	  })
-	  .on('error', (err) => {
-		console.log(`Connection error: ${err.message}`);
-	  });
-
-	console.log("Connected to Mongo again");
-	
-	db.once('open',function(){
-	  Book.find({},function (err, books) {
-		console.log("books supplied"+books);
-		res.send(books);
-		mongoose.connection.close();
-	  });
-	});
-	
-	
-	console.log("ddone");
-});
-
-
-
 
 app.get('/', (req, res) => res.send('Hello Universe1'));
 app.get('/two', (req, res) => res.send('Hello Universe2'));
