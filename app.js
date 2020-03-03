@@ -32,7 +32,7 @@ db.once('open', function() {
     //var Book = mongoose.model('Book', BookSchema, 'bookstore');
  
     // a document instance
-    var book1 = new Book({ name: 'Introduction to sakhbk jcwej', price: 101, quantity: 2 });
+    var book1 = new Book({ name: 'Introduction to sadwej', price: 1301, quantity: 23 });
  
     // save model to database
     book1.save(function (err, book) {
@@ -70,14 +70,9 @@ app.post("/add", function (req, res) {
 });
 
 app.get("/show", function (req, res) {
-	var BookSchema = mongoose.Schema({
-      name: String,
-      price: Number,
-      quantity: Number
-    });
  
     // compile schema to model
-    var Book = mongoose.model('Book', BookSchema, 'bookstore');
+    //var Book = mongoose.model('Book', BookSchema, 'bookstore');
  
 	Book.find({}, function(error, books) {
 		console.log(books); //Display the comments returned by MongoDB, if any were found. Executes after the query is complete.
