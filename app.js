@@ -18,7 +18,7 @@ var db = mongoose.connection
 
 db.once('open', function() {
     console.log("Connection Successful!");
-    var book1 = new Book({ name: 'Introduction to sdkjaa', price: 13201, quantity: 233 });
+    var book1 = new Book({ name: 'Introduction to maqaa', price: 901, quantity: 93 });
     book1.save(function (err, book) {
       if (err) return console.error(err);
       console.log(book.name + " saved to bookstore collection.");
@@ -26,8 +26,24 @@ db.once('open', function() {
 }); 
 
 
+app.post('/test', function (req, res) {
+  res.send('POST request happened')
+})
 
+app.post("/add", function (req, res) {
+		console.log("adding....");
+		var n = Math.random();
+		var book1 = new Book({ name: 'Introduction to Mongoose'+n, price: 10+n, quantity: 25+n });
+		book1.save(function (err) {
+		  if (err) 
+			  return console.error(err);
+		  console.log("saved....");
+		  
+		});
+		console.log("finishing....");
+});
 
+/*
 app.post("/add", function (req, res) {
 		console.log("adding....");
 		var n = Math.random();
@@ -35,16 +51,19 @@ app.post("/add", function (req, res) {
 		book1.save(function (err, book) {
 		  if (err) return console.error(err);
 		  console.log(book.name + " saved to bookstore collection.");
+		  res.send(book.name + " saved to bookstore collection.");
 		});
-		
 		console.log("finishing....");
 });
+*/
 
 app.get("/show", function (req, res) {
+	console.log("showing....");
 	Book.find({}, function(error, books) {
 		console.log(books);
 		res.send(books);
 	});
+	console.log("finishing....");
 });
 
 app.get('/', (req, res) => res.send('Hello Universe1'));
